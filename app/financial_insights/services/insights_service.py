@@ -105,6 +105,7 @@ class FinancialInsightsService:
             user_id=user_id,
             period_start=current_month_start,
             period_end=today,
+            created_at=datetime.now(timezone.utc),
             total_income=inc,
             total_expenses=exp,
             net_cash_flow=cash_flow,
