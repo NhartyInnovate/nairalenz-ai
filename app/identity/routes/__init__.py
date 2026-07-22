@@ -1,7 +1,5 @@
 from fastapi import APIRouter
+from app.identity.routes.auth import router as auth_router
 
 router = APIRouter()
-
-@router.get("")
-async def root():
-    return {"message": "Welcome to identity API"}
+router.include_router(auth_router)

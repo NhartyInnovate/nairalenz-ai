@@ -1,2 +1,3 @@
-# Identity models package
-# Imports of SQLAlchemy models will be added here
+from app.identity.models.user import User
+
+__all__ = ["User"]

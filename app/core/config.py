@@ -10,6 +10,11 @@ class Settings(BaseSettings):
     # Database Configuration
     DATABASE_URL: str
     
+    # JWT Authentication settings
+    SECRET_KEY: str = "secret-change-this-in-production"
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
+
     # CORS Origins (comma-separated list in env)
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
 

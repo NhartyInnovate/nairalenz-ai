@@ -8,7 +8,7 @@ from app.platform.routes import router as platform_router
 api_router = APIRouter()
 
 # Include routes for all configured domains
-api_router.include_router(identity_router, prefix="/identity", tags=["Identity"])
+api_router.include_router(identity_router, prefix="/auth", tags=["Identity"])
 api_router.include_router(financial_data_router, prefix="/financial-data", tags=["Financial Data"])
 api_router.include_router(financial_intelligence_router, prefix="/financial-intelligence", tags=["Financial Intelligence"])
 api_router.include_router(conversation_router, prefix="/conversation", tags=["Conversation"])
