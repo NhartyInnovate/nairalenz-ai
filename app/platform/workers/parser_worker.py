@@ -48,8 +48,14 @@ async def handle_transactions_normalized(event: TransactionsNormalized) -> None:
     logger.info(f"[WORKER] Triggered categorization loop for Statement {event.statement_id}")
     
     async with async_session_maker() as db_session:
+        # 1. Run Intelligence Categorization
         intelligence_service = FinancialIntelligenceService(db_session)
         await intelligence_service.categorize_statement_transactions(event.statement_id)
+        
+        # 2. Run Financial Insights Pipeline
+        from app.financial_insights.services.insights_service import FinancialInsightsService as InsightsService
+        insights_service = InsightsService(db_session)
+        await insights_service.compute_user_insights(event.user_id)
 
 def init_worker() -> None:
     """

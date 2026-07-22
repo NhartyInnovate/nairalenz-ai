@@ -71,3 +71,33 @@ class CategoryCorrected(Event):
     corrected_category_id: uuid.UUID
     user_id: uuid.UUID
     event_name: str = "CategoryCorrected"
+
+class FinancialHealthUpdated(Event):
+    user_id: uuid.UUID
+    score: int
+    snapshot_id: uuid.UUID
+    event_name: str = "FinancialHealthUpdated"
+
+class InsightGenerated(Event):
+    user_id: uuid.UUID
+    insight_id: uuid.UUID
+    insight_type: str
+    event_name: str = "InsightGenerated"
+
+class RecurringPaymentDetected(Event):
+    user_id: uuid.UUID
+    recurring_payment_id: uuid.UUID
+    merchant: str
+    event_name: str = "RecurringPaymentDetected"
+
+class AnomalyDetected(Event):
+    user_id: uuid.UUID
+    transaction_id: uuid.UUID
+    anomaly_type: str
+    event_name: str = "AnomalyDetected"
+
+class SalaryDetected(Event):
+    user_id: uuid.UUID
+    amount: float
+    payday: date
+    event_name: str = "SalaryDetected"
