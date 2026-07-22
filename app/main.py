@@ -3,13 +3,30 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.api.router import api_router
 
+from contextlib import asynccontextmanager
+from app.platform.workers.parser_worker import init_worker
+from app.db.session import async_session_maker
+from app.financial_intelligence.utils.seeder import seed_data_if_empty
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Register subscribers to platform event bus
+    init_worker()
+    
+    # Auto-seed standard categories, rules, and merchants on startup
+    async with async_session_maker() as session:
+        await seed_data_if_empty(session)
+        
+    yield
+
 app = FastAPI(
     title=settings.PROJECT_NAME,
     description="NairaLens AI - Financial Intelligence Platform Backend",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
-    openapi_url="/openapi.json"
+    openapi_url="/openapi.json",
+    lifespan=lifespan
 )
 
 # Set up CORS middleware

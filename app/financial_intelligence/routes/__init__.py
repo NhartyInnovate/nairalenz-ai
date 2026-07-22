@@ -1,7 +1,5 @@
 from fastapi import APIRouter
+from app.financial_intelligence.routes.intelligence import router as intelligence_router
 
 router = APIRouter()
-
-@router.get("")
-async def root():
-    return {"message": "Welcome to financial_intelligence API"}
+router.include_router(intelligence_router)

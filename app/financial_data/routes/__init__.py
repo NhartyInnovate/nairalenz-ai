@@ -1,7 +1,6 @@
 from fastapi import APIRouter
+from app.financial_data.routes.statement import router as statement_router
 
 router = APIRouter()
-
-@router.get("")
-async def root():
-    return {"message": "Welcome to financial_data API"}
+# Include the subrouter with prefix /statements to satisfy FastAPI non-empty route constraints
+router.include_router(statement_router, prefix="/statements", tags=["Financial Data"])

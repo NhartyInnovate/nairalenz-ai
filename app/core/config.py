@@ -15,6 +15,10 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
+    # File Storage Configurations
+    UPLOAD_DIR: str = "storage/statements"
+    MAX_FILE_SIZE_BYTES: int = 10 * 1024 * 1024  # 10 MB limit
+
     # CORS Origins (comma-separated list in env)
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
 
