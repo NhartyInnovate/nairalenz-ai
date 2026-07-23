@@ -20,6 +20,7 @@ import app.financial_intelligence.models  # noqa
 import app.conversation.models  # noqa
 import app.platform.models  # noqa
 import app.parsing.models  # noqa
+import app.financial_insights.models  # noqa
 
 # this is the Alembic Config object, which provides access to the values within the .ini file in use.
 config = context.config

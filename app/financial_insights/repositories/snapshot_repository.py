@@ -15,7 +15,6 @@ class SnapshotRepository:
         return snapshot
 
     async def get_latest_for_user(self, user_id: uuid.UUID) -> Optional[FinancialHealthSnapshot]:
-        self.db.expire_all()
         query = (
             select(FinancialHealthSnapshot)
             .where(FinancialHealthSnapshot.user_id == user_id)
@@ -23,6 +22,7 @@ class SnapshotRepository:
                 FinancialHealthSnapshot.period_end.desc(),
                 FinancialHealthSnapshot.created_at.desc()
             )
+            .execution_options(populate_existing=True)
         )
         result = await self.db.execute(query)
         return result.scalars().first()
