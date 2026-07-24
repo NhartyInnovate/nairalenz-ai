@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     DATABASE_URL: str
     
     # JWT Authentication settings
-    SECRET_KEY: str = "secret-change-this-in-production"
+    SECRET_KEY: str
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
